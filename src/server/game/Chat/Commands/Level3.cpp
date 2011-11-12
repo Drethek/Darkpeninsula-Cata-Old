@@ -2544,8 +2544,9 @@ bool ChatHandler::HandleLevelUpCommand(const char *args)
     Player* target;
     uint64 target_guid;
     std::string target_name;
-    if (!extractPlayerTarget(nameStr, &target, &target_guid, &target_name))
-        return false;
+
+    target = m_session->GetPlayer();
+    target_guid =  m_session->GetPlayer()->GetGUID();
 
     int32 oldlevel = target ? target->getLevel() : Player::GetLevelFromDB(target_guid);
     int32 addlevel = levelStr ? atoi(levelStr) : 1;
