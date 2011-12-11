@@ -173,33 +173,6 @@ ChatCommand * ChatHandler::getCommandTable()
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
-    static ChatCommand gmCommandTable[] =
-    {
-        { "chat",           SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGMChatCommand>,              "", NULL },
-        { "fly",            SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleGMFlyCommand>,               "", NULL },
-        { "ingame",         SEC_PLAYER,         true,  OldHandler<&ChatHandler::HandleGMListIngameCommand>,        "", NULL },
-        { "list",           SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleGMListFullCommand>,          "", NULL },
-        { "visible",        SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGMVisibleCommand>,           "", NULL },
-        { "",               SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGMCommand>,                  "", NULL },
-        { NULL,             0,                  false, NULL,                                           "", NULL }
-    };
-
-    static ChatCommand goCommandTable[] =
-    {
-        { "creature",       SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoCreatureCommand>,          "", NULL },
-        { "graveyard",      SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoGraveyardCommand>,         "", NULL },
-        { "grid",           SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoGridCommand>,              "", NULL },
-        { "object",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoObjectCommand>,            "", NULL },
-        { "taxinode",       SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoTaxinodeCommand>,          "", NULL },
-        { "trigger",        SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoTriggerCommand>,           "", NULL },
-        { "zonexy",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoZoneXYCommand>,            "", NULL },
-        { "xy",             SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoXYCommand>,                "", NULL },
-        { "xyz",            SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoXYZCommand>,               "", NULL },
-        { "ticket",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoTicketCommand>,            "", NULL },
-        { "",               SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleGoXYZCommand>,               "", NULL },
-        { NULL,             0,                  false, NULL,                                           "", NULL }
-    };
-
     static ChatCommand groupCommandTable[] =
     {
         { "leader",         SEC_ADMINISTRATOR,     false,  OldHandler<&ChatHandler::HandleGroupLeaderCommand>,         "", NULL },
@@ -224,22 +197,6 @@ ChatCommand * ChatHandler::getCommandTable()
         { "unbind",         SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleInstanceUnbindCommand>,      "", NULL },
         { "stats",          SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleInstanceStatsCommand>,       "", NULL },
         { "savedata",       SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleInstanceSaveDataCommand>,    "", NULL },
-        { NULL,             0,                  false, NULL,                                           "", NULL }
-    };
-
-    static ChatCommand learnCommandTable[] =
-    {
-        { "all",            SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleLearnAllCommand>,            "", NULL },
-        { "all_gm",         SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleLearnAllGMCommand>,          "", NULL },
-        { "all_crafts",     SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleLearnAllCraftsCommand>,      "", NULL },
-        { "all_default",    SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleLearnAllDefaultCommand>,     "", NULL },
-        { "all_lang",       SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleLearnAllLangCommand>,        "", NULL },
-        { "all_myclass",    SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleLearnAllMyClassCommand>,     "", NULL },
-        { "all_mypettalents", SEC_ADMINISTRATOR, false, OldHandler<&ChatHandler::HandleLearnAllMyPetTalentsCommand>, "", NULL },
-        { "all_myspells",   SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleLearnAllMySpellsCommand>,    "", NULL },
-        { "all_mytalents",  SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleLearnAllMyTalentsCommand>,   "", NULL },
-        { "all_recipes",    SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleLearnAllRecipesCommand>,     "", NULL },
-        { "",               SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleLearnCommand>,               "", NULL },
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
@@ -281,35 +238,6 @@ ChatCommand * ChatHandler::getCommandTable()
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
-    static ChatCommand modifyCommandTable[] =
-    {
-        { "hp",             SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyHPCommand>,            "", NULL },
-        { "mana",           SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyManaCommand>,          "", NULL },
-        { "rage",           SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyRageCommand>,          "", NULL },
-        { "runicpower",     SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyRunicPowerCommand>,    "", NULL },
-        { "energy",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyEnergyCommand>,        "", NULL },
-        { "money",          SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyMoneyCommand>,         "", NULL },
-        { "speed",          SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifySpeedCommand>,         "", NULL },
-        { "swim",           SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifySwimCommand>,          "", NULL },
-        { "scale",          SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyScaleCommand>,         "", NULL },
-        { "bit",            SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyBitCommand>,           "", NULL },
-        { "bwalk",          SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyBWalkCommand>,         "", NULL },
-        { "fly",            SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyFlyCommand>,           "", NULL },
-        { "aspeed",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyASpeedCommand>,        "", NULL },
-        { "faction",        SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyFactionCommand>,       "", NULL },
-        { "spell",          SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifySpellCommand>,         "", NULL },
-        { "tp",             SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyTalentCommand>,        "", NULL },
-        { "mount",          SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyMountCommand>,         "", NULL },
-        { "currency",       SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyCurrencyCommand>,      "", NULL },
-        { "rep",            SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleModifyRepCommand>,           "", NULL },
-        { "drunk",          SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleModifyDrunkCommand>,         "", NULL },
-        { "standstate",     SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleModifyStandStateCommand>,    "", NULL },
-        { "morph",          SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleModifyMorphCommand>,         "", NULL },
-        { "phase",          SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleModifyPhaseCommand>,         "", NULL },
-        { "gender",         SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleModifyGenderCommand>,        "", NULL },
-        { NULL,             0,                  false, NULL,                                           "", NULL }
-    };
-
     static ChatCommand petCommandTable[] =
     {
         { "create",         SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleCreatePetCommand>,           "", NULL },
@@ -329,6 +257,7 @@ ChatCommand * ChatHandler::getCommandTable()
     static ChatCommand resetCommandTable[] =
     {
         { "achievements",   SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleResetAchievementsCommand>,   "", NULL },
+        { "honor",          SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleResetHonorCommand>,          "", NULL },
         { "level",          SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleResetLevelCommand>,          "", NULL },
         { "spells",         SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleResetSpellsCommand>,         "", NULL },
         { "stats",          SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandleResetStatsCommand>,          "", NULL },
@@ -448,10 +377,6 @@ ChatCommand * ChatHandler::getCommandTable()
 
     static ChatCommand commandTable[] =
     {
-        { "gm",             SEC_MODERATOR,      true,  NULL,                                           "", gmCommandTable       },
-        { "go",             SEC_MODERATOR,      false, NULL,                                           "", goCommandTable       },
-        { "learn",          SEC_MODERATOR,      false, NULL,                                           "", learnCommandTable    },
-        { "modify",         SEC_MODERATOR,      false, NULL,                                           "", modifyCommandTable   },
         { "tele",           SEC_MODERATOR,      true,  NULL,                                           "", teleCommandTable     },
         { "character",      SEC_GAMEMASTER,     true,  NULL,                                           "", characterCommandTable},
         { "event",          SEC_GAMEMASTER,     false, NULL,                                           "", eventCommandTable    },
@@ -463,13 +388,10 @@ ChatCommand * ChatHandler::getCommandTable()
         { "reset",          SEC_ADMINISTRATOR,  true,  NULL,                                           "", resetCommandTable    },
         { "instance",       SEC_ADMINISTRATOR,  true,  NULL,                                           "", instanceCommandTable },
         { "server",         SEC_ADMINISTRATOR,  true,  NULL,                                           "", serverCommandTable   },
-
-        { "channel",        SEC_ADMINISTRATOR,  true, NULL,                                            "", channelCommandTable  },
-
-        { "pet",            SEC_GAMEMASTER,     false, NULL,                                           "", petCommandTable },
-        { "ticket",         SEC_MODERATOR,      false,  NULL,                                          "", ticketCommandTable },
+        { "channel",        SEC_ADMINISTRATOR,  true,  NULL,                                           "", channelCommandTable  },
+        { "pet",            SEC_GAMEMASTER,     false, NULL,                                           "", petCommandTable      },
+        { "ticket",         SEC_MODERATOR,      false, NULL,                                           "", ticketCommandTable   },
         { "opcode",         SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleOpcodeTestCommand>,          "", NULL },
-
         { "aura",           SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleAuraCommand>,                "", NULL },
         { "unaura",         SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleUnAuraCommand>,              "", NULL },
         { "nameannounce",   SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleNameAnnounceCommand>,        "", NULL },
@@ -527,17 +449,15 @@ ChatCommand * ChatHandler::getCommandTable()
         { "cometome",       SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleComeToMeCommand>,            "", NULL },
         { "damage",         SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleDamageCommand>,              "", NULL },
         { "combatstop",     SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleCombatStopCommand>,          "", NULL },
-        { "flusharenapoints", SEC_ADMINISTRATOR, false, OldHandler<&ChatHandler::HandleFlushArenaPointsCommand>,    "", NULL },
+        { "flusharenapoints", SEC_ADMINISTRATOR, false, OldHandler<&ChatHandler::HandleFlushArenaPointsCommand>,   "", NULL },
         { "repairitems",    SEC_GAMEMASTER,     true,  OldHandler<&ChatHandler::HandleRepairitemsCommand>,         "", NULL },
         { "waterwalk",      SEC_GAMEMASTER,     false, OldHandler<&ChatHandler::HandleWaterwalkCommand>,           "", NULL },
-
         { "freeze",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleFreezeCommand>,              "", NULL },
         { "unfreeze",       SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleUnFreezeCommand>,            "", NULL },
         { "listfreeze",     SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleListFreezeCommand>,          "", NULL },
         { "root",           SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleFreezeCommand>,              "", NULL },
         { "unroot",         SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleUnFreezeCommand>,            "", NULL },
         { "listroot",       SEC_MODERATOR,      false, OldHandler<&ChatHandler::HandleListFreezeCommand>,          "", NULL },
-
         { "possess",        SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandlePossessCommand>,             "", NULL },
         { "unpossess",      SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleUnPossessCommand>,           "", NULL },
         { "bindsight",      SEC_ADMINISTRATOR,  false, OldHandler<&ChatHandler::HandleBindSightCommand>,           "", NULL },

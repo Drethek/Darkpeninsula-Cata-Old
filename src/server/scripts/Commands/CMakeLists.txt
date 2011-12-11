@@ -6,6 +6,7 @@ set(scripts_STAT_SRCS
   Commands/cs_npc.cpp
   Commands/cs_go.cpp
   Commands/cs_learn.cpp
+  Commands/cs_misc.cpp
   Commands/cs_modify.cpp
   Commands/cs_debug.cpp
   Commands/cs_gobject.cpp
@@ -17,7 +18,6 @@ set(scripts_STAT_SRCS
 #  Commands/cs_tele.cpp
 #  Commands/cs_character.cpp
 #  Commands/cs_event.cpp
-  Commands/cs_reload.cpp
 #  Commands/cs_list.cpp
 #  Commands/cs_lookup.cpp
 #  Commands/cs_pdump.cpp

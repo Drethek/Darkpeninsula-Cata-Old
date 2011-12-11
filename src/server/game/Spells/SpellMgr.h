@@ -271,7 +271,7 @@ inline bool IsSealSpell(SpellEntry const *spellInfo)
         (spellInfo->SpellFamilyFlags[1] & 0x80000000 // Seal of Justice
         || spellInfo->SpellFamilyFlags[1] & 0x20000000 // Seal of Righteoussness
         || spellInfo->SpellFamilyFlags[1] & 0x00000800  // Seal of Truth
-        || spellInfo->SpellFamilyFlags[1] & 0x02000000); // Seal of Insigth
+        || spellInfo->SpellFamilyFlags[1] & 0x02000000); // Seal of Insigth		 
 }
 
 inline bool IsElementalShield(SpellEntry const *spellInfo)
