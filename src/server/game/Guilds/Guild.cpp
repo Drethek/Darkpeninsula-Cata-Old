@@ -3033,7 +3033,7 @@ void Guild::_BroadcastEvent(GuildEvents guildEvent, const uint64& guid, const ch
 }
 
 // Guild Advancement
-void Guild::GainXP(uint64 xp)
+void Guild::GainXP(uint64 xp, uint32 guildid, uint64 guid)
 {
     if (!xp)
         return;
@@ -3045,6 +3045,8 @@ void Guild::GainXP(uint64 xp)
     uint64 new_xp = m_xp + xp;
     uint64 nextLvlXP = GetNextLevelXP();
     uint8 level = GetLevel();
+    uint64 weekly_xp = GetWeeklyExp(guildid,guid);
+    uint64 total_xp = GetTotalExp(guildid,guid);
 
     if(new_xp > m_xp_cap)
         return;
@@ -3075,6 +3077,11 @@ void Guild::GainXP(uint64 xp)
     for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
         if (Player *player = itr->second->FindPlayer())
             player->GetSession()->SendPacket(&data);
+
+    // Set Player Guild XP
+    weekly_xp = weekly_xp + xp;
+    total_xp = total_xp + xp;
+    SetPlayerGuildExp(guildid,guid,weekly_xp,total_xp);
 }
 
 void Guild::LevelUp()
@@ -3124,4 +3131,48 @@ void Guild::SaveXP()
         stmt->setUInt32(4, m_id);
         CharacterDatabase.Execute(stmt);
     }
+}
+
+uint64 Guild::GetWeeklyExp(uint32 guildid,uint64 guid)
+{
+    PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(CHAR_GUILD_GET_PLAYER_WEEKLY_XP_EXP);
+    stmt->setUInt32(0, guildid);
+    stmt->setUInt32(1, guid);
+    PreparedQueryResult result = CharacterDatabase.Query(stmt);
+
+    if (result) //load
+    {
+        Field *fields = result->Fetch();
+        uint64 m_weekly_xp = fields[0].GetUInt32();
+        return m_weekly_xp;
+    }
+    else
+        return 0;
+}
+
+uint64 Guild::GetTotalExp(uint32 guildid,uint64 guid)
+{
+    PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(CHAR_GUILD_GET_PLAYER_WEEKLY_XP_EXP);
+    stmt->setUInt32(0, guildid);
+    stmt->setUInt32(1, guid);
+    PreparedQueryResult result = CharacterDatabase.Query(stmt);
+
+    if (result) //load
+    {
+        Field *fields = result->Fetch();
+        uint64 m_weekly_xp = fields[0].GetUInt32();
+        return m_weekly_xp;
+    }
+    else
+        return 0;
+}
+
+void Guild::SetPlayerGuildExp(uint32 guildid,uint64 guid, uint64 weekly_xp, uint64 total_xp)
+{
+    PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_GUILD_SAVE_XP);
+    stmt->setUInt64(0, weekly_xp);
+    stmt->setUInt64(1, total_xp);
+    stmt->setUInt32(2, guildid);
+    stmt->setUInt32(3, guid);
+    CharacterDatabase.Execute(stmt);
 }

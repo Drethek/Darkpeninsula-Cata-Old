@@ -15130,7 +15130,7 @@ void Player::RewardQuest(Quest const *pQuest, uint32 reward, Object* questGiver,
     // If the player has a guild, it should gain 1/4 of his experience.
     // Despite of him being at max level or not.
     if (Guild* pGuild = sObjectMgr->GetGuildById(GetGuildId()))
-        pGuild->GainXP(XP/4);
+        pGuild->GainXP(XP/4, GetGuildId(), GetGUID());
 
     // Give player extra money if GetRewOrReqMoney > 0 and get ReqMoney if negative
     if (pQuest->GetRewOrReqMoney())

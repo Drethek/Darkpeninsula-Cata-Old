@@ -731,10 +731,15 @@ public:
     uint64 GetGuildMoney() { return m_bankMoney; }
     uint64 SetGuildMoney(uint64 add) { return m_bankMoney += add; }
 
-    void GainXP(uint64 xp);
+    void GainXP(uint64 xp, uint32 guildid, uint64 guid);
     void LevelUp();
     void ResetTodayXP() { m_today_xp = 0; }
     void GenerateXPCap();
+
+    // Player Guild Exp
+    uint64 GetWeeklyExp(uint32 guildid,uint64 guid);
+    uint64 GetTotalExp(uint32 guildid,uint64 guid);
+    void SetPlayerGuildExp(uint32 guildid,uint64 guid, uint64 weekly_xp, uint64 total_xp);
 
 protected:
     uint32 m_id;
