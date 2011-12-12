@@ -3152,7 +3152,7 @@ uint64 Guild::GetWeeklyExp(uint32 guildid,uint64 guid)
 
 uint64 Guild::GetTotalExp(uint32 guildid,uint64 guid)
 {
-    PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(CHAR_GUILD_GET_PLAYER_WEEKLY_XP_EXP);
+    PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(CHAR_GUILD_GET_PLAYER_TOTAL_XP_EXP);
     stmt->setUInt32(0, guildid);
     stmt->setUInt32(1, guid);
     PreparedQueryResult result = CharacterDatabase.Query(stmt);
@@ -3160,8 +3160,8 @@ uint64 Guild::GetTotalExp(uint32 guildid,uint64 guid)
     if (result) //load
     {
         Field *fields = result->Fetch();
-        uint64 m_weekly_xp = fields[0].GetUInt32();
-        return m_weekly_xp;
+        uint64 m_total_xp = fields[0].GetUInt32();
+        return m_total_xp;
     }
     else
         return 0;
