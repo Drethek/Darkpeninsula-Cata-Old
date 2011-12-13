@@ -3143,7 +3143,7 @@ uint64 Guild::GetWeeklyExp(uint32 guildid,uint64 guid)
     if (result) //load
     {
         Field *fields = result->Fetch();
-        uint64 m_weekly_xp = fields[0].GetUInt32();
+        uint64 m_weekly_xp = fields[0].GetUInt64();
         return m_weekly_xp;
     }
     else
@@ -3160,7 +3160,7 @@ uint64 Guild::GetTotalExp(uint32 guildid,uint64 guid)
     if (result) //load
     {
         Field *fields = result->Fetch();
-        uint64 m_total_xp = fields[0].GetUInt32();
+        uint64 m_total_xp = fields[0].GetUInt64();
         return m_total_xp;
     }
     else
