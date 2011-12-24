@@ -306,6 +306,7 @@ private:
         const uint64& GetGUID() const { return m_guid; }
         std::string GetName() const { return m_name; }
         uint32 GetAccountId() const { return m_accountId; }
+        uint32 GetGuildId() const { return m_guildId; }
         uint8 GetRankId() const { return m_rankId; }
         uint64 GetLogoutTime() { return m_logoutTime; }
         std::string GetPublicNote() { return m_publicNote; }
@@ -731,15 +732,15 @@ public:
     uint64 GetGuildMoney() { return m_bankMoney; }
     uint64 SetGuildMoney(uint64 add) { return m_bankMoney += add; }
 
-    void GainXP(uint64 xp, uint32 guildid, uint64 guid);
+    void GainXP(uint64 xp, uint32 guildid, uint32 guid);
     void LevelUp();
     void ResetTodayXP() { m_today_xp = 0; }
     void GenerateXPCap();
 
     // Player Guild Exp
-    uint64 GetWeeklyExp(uint32 guildid,uint64 guid);
-    uint64 GetTotalExp(uint32 guildid,uint64 guid);
-    void SetPlayerGuildExp(uint32 guildid,uint64 guid, uint64 weekly_xp, uint64 total_xp);
+    uint64 GetWeeklyExp(uint32 guildid,uint32 guid);
+    uint64 GetTotalExp(uint32 guildid,uint32 guid);
+    void SetPlayerGuildExp(uint32 guildid,uint32 guid, uint64 weekly_xp, uint64 total_xp);
 
 protected:
     uint32 m_id;
