@@ -106,6 +106,7 @@ World::World()
     m_MaxPlayerCount = 0;
     m_NextDailyQuestReset = 0;
     m_NextWeeklyQuestReset = 0;
+    m_NextWeeklyGuildActivityReset = 0;
     m_NextCurrencyReset = 0;
     m_scheduledScripts = 0;
 
@@ -1762,6 +1763,9 @@ void World::SetInitialWorldSettings()
     sLog->outString("Calculate next weekly quest reset time..." );
     InitWeeklyQuestResetTime();
 
+    sLog->outString("Calculate next weekly guild activity reset time..." );
+    InitWeeklyGuildActivityResetTime();
+
     sLog->outString("Calculate random battleground reset time..." );
     InitRandomBGResetTime();
 
@@ -1931,6 +1935,9 @@ void World::Update(uint32 diff)
 
     if (m_gameTime > m_NextWeeklyQuestReset)
         ResetWeeklyQuests();
+
+    if (m_gameTime > m_NextWeeklyGuildActivityReset)
+        ResetWeeklyGuildActivity();
 
     if (m_gameTime > m_NextRandomBGReset)
         ResetRandomBG();
@@ -2663,6 +2670,13 @@ void World::InitWeeklyQuestResetTime()
     m_NextWeeklyQuestReset = wstime < curtime ? curtime : time_t(wstime);
 }
 
+void World::InitWeeklyGuildActivityResetTime()
+{
+    time_t guild_activity_time = uint64(sWorld->getWorldState(WS_WEEKLY_GUILD_ACTIVITY_RESET_TIME));
+    time_t current_time = time(NULL);
+    m_NextWeeklyGuildActivityReset = guild_activity_time < current_time ? current_time : time_t(guild_activity_time);
+}
+
 void World::InitDailyQuestResetTime()
 {
     time_t mostRecentQuestTime;
@@ -2798,6 +2812,13 @@ void World::ResetWeeklyQuests()
 
     // change available weeklies
     sPoolMgr->ChangeWeeklyQuests();
+}
+
+void World::ResetWeeklyGuildActivity()
+{
+    CharacterDatabase.Execute("UPDATE guild_member SET weekly_xp = '0'");
+    m_NextWeeklyGuildActivityReset = time_t(m_NextWeeklyGuildActivityReset + WEEK);
+    sWorld->setWorldState(WS_WEEKLY_GUILD_ACTIVITY_RESET_TIME, uint64(m_NextWeeklyGuildActivityReset));
 }
 
 void World::ResetRandomBG()
