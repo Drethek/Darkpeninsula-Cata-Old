@@ -1284,7 +1284,7 @@ void Guild::OnPlayerStatusChange(Player* plr, uint32 flag, bool state)
 
 ///////////////////////////////////////////////////////////////////////////////
 // HANDLE CLIENT COMMANDS
-void Guild::HandleRoster(WorldSession *session /*= NULL*/)
+void Guild::HandleRoster(WorldSession *session /*= NULL*/, uint32 guid, uint64 activity_weekly_xp, uint64 activity_total_xp)
 {
     // Guess size
     WorldPacket data(SMSG_GUILD_ROSTER, (4 + m_motd.length() + 1 + m_info.length() + 1 + 4 + _GetRanksSize() * (4 + 4 + GUILD_BANK_MAX_TABS * (4 + 4)) + m_members.size() * 50));
@@ -1302,7 +1302,12 @@ void Guild::HandleRoster(WorldSession *session /*= NULL*/)
     
     // Guild Activity (Weekly)
     for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
-        data << uint64(GetWeeklyExp(itr->second->GetGuildId(),GUID_LOPART(itr->second->GetGUID())));
+    {
+        if(GUID_LOPART(itr->second->GetGUID()) == guid)
+            data << uint64(activity_weekly_xp);
+        else
+            data << uint64(GetWeeklyExp(itr->second->GetGuildId(),GUID_LOPART(itr->second->GetGUID())));
+    }
 
     data << m_info;
 
@@ -1327,7 +1332,12 @@ void Guild::HandleRoster(WorldSession *session /*= NULL*/)
 
     // Guild Activity (Total)
     for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
-        data << uint64(GetTotalExp(itr->second->GetGuildId(),GUID_LOPART(itr->second->GetGUID())));
+    {
+        if(GUID_LOPART(itr->second->GetGUID()) == guid)
+            data << uint64(activity_total_xp);
+        else
+            data << uint64(GetTotalExp(itr->second->GetGuildId(),GUID_LOPART(itr->second->GetGUID())));
+    }
 
     for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
         data << uint8(0); // unk
@@ -3085,6 +3095,17 @@ void Guild::GainXP(uint64 xp, uint32 guildid, uint32 guid)
     weekly_xp = weekly_xp + xp;
     total_xp = total_xp + xp;
     SetPlayerGuildExp(guildid,guid,weekly_xp,total_xp);
+
+    for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
+    {
+        if (Player *player = itr->second->FindPlayer())
+        {
+            if(GUID_LOPART(itr->second->GetGUID()) == guid)
+                HandleRoster(player->GetSession(),guid,weekly_xp,total_xp);
+            else
+                HandleRoster(player->GetSession(),0,0,0);
+        }
+    }
 }
 
 void Guild::LevelUp()

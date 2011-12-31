@@ -643,7 +643,7 @@ public:
     void SwitchRank(uint32 oldRank, uint32 newRank);
 
     // Handle client commands
-    void HandleRoster(WorldSession *session = NULL);          // NULL = broadcast
+    void HandleRoster(WorldSession *session = NULL, uint32 guid = 0, uint64 activity_weekly_xp = 0, uint64 activity_total_xp = 0);          // NULL = broadcast
     void HandleQuery(WorldSession *session);
     void HandleSetMOTD(WorldSession* session, const std::string& motd);
     void HandleSetInfo(WorldSession* session, const std::string& info);
