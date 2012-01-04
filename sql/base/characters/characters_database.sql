@@ -4,6 +4,7 @@ MySQL - 5.1.54-1ubuntu4 : Database - Characters
 *********************************************************************
 */
 
+
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -383,12 +384,10 @@ CREATE TABLE `character_glyphs` (
   PRIMARY KEY (`guid`,`spec`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `character_homebind` */
--- Table structure for table `character_guild_reputation`
---
+/*Table structure for table `character_guild_reputation` */
+
 DROP TABLE IF EXISTS `character_guild_reputation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+
 CREATE TABLE `character_guild_reputation` (
   `guid` int(10) unsigned NOT NULL,
   `guildid` int(10) unsigned NOT NULL COMMENT 'Guild Identificator',
@@ -396,18 +395,8 @@ CREATE TABLE `character_guild_reputation` (
   UNIQUE KEY `guid_key` (`guid`),
   KEY `guildid_key` (`guildid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Characters Guild Reputation System';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `character_guild_reputation`
---
-
-LOCK TABLES `character_guild_reputation` WRITE;
-/*!40000 ALTER TABLE `character_glyphs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `character_glyphs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
+/*Table structure for table `character_homebind` */
 
 DROP TABLE IF EXISTS `character_homebind`;
 
