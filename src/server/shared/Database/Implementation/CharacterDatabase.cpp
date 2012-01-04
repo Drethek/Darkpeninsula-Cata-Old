@@ -165,8 +165,14 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PREPARE_STATEMENT(CHAR_SET_GUILD_RANK_RIGHTS, "UPDATE guild_rank SET rights = ? WHERE rid = ? AND guildid = ?", CONNECTION_ASYNC); // 0: uint32, 1: uint8, 2: uint32
     PREPARE_STATEMENT(CHAR_GUILD_SAVE_XP, "UPDATE guild SET xp = ?, m_today_xp = ?, m_xp_cap = ?, level = ? WHERE guildid = ?", CONNECTION_ASYNC); // 0,1,2: uint64 3,4: uint32
     PREPARE_STATEMENT(CHAR_GUILD_SAVE_PLAYER_XP_EXP, "UPDATE guild_member SET weekly_xp = ?, total_xp = ? WHERE guildid = ? AND guid = ?", CONNECTION_ASYNC); // 0,1,3: uint64 2: uint32
-    PREPARE_STATEMENT(CHAR_GUILD_GET_PLAYER_WEEKLY_XP_EXP, "SELECT weekly_xp FROM guild_member WHERE guildid = ? AND guid = ?", CONNECTION_SYNCH);
-    PREPARE_STATEMENT(CHAR_GUILD_GET_PLAYER_TOTAL_XP_EXP, "SELECT total_xp FROM guild_member WHERE guildid = ? AND guid = ?", CONNECTION_SYNCH);
+    PREPARE_STATEMENT(CHAR_GUILD_GET_PLAYER_WEEKLY_XP_EXP, "SELECT weekly_xp FROM guild_member WHERE guildid = ? AND guid = ?", CONNECTION_SYNCH); // 0: uint64 1,2: uint32
+    PREPARE_STATEMENT(CHAR_GUILD_GET_PLAYER_TOTAL_XP_EXP, "SELECT total_xp FROM guild_member WHERE guildid = ? AND guid = ?", CONNECTION_SYNCH); // 0: uint64 1,2: uint32
+    PREPARE_STATEMENT(CHAR_ADD_GUILD_REP, "INSERT INTO character_guild_reputation (guid, guildid) VALUES (?, ?)", CONNECTION_ASYNC); // 0,1: uint32
+    PREPARE_STATEMENT(CHAR_GET_GUILD_REP, "SELECT guildid FROM character_guild_reputation WHERE guid = ?", CONNECTION_SYNCH); // 0: uint32
+    PREPARE_STATEMENT(CHAR_SET_GUILD_REP, "UPDATE character_guild_reputation SET guildid = ? WHERE guid = ?", CONNECTION_ASYNC); // 0,1: uint32
+    PREPARE_STATEMENT(CHAR_SET_GUILD_REP_TIME, "UPDATE character_guild_reputation SET disband_time = UNIX_TIMESTAMP(NOW()) WHERE guid = ?", CONNECTION_ASYNC); // 0: uint32
+    PREPARE_STATEMENT(CHAR_SET_GUILD_REP_RESET_TIME, "UPDATE character_guild_reputation SET disband_time = '0' WHERE guid = ?", CONNECTION_ASYNC); // 0: uint32
+    PREPARE_STATEMENT(CHAR_GET_GUILD_REP_TIME, "SELECT disband_time FROM character_guild_reputation WHERE guid = ?", CONNECTION_SYNCH); // 0: uint32
     // 0-5: uint32
     PREPARE_STATEMENT(CHAR_SET_GUILD_EMBLEM_INFO, "UPDATE guild SET EmblemStyle = ?, EmblemColor = ?, BorderStyle = ?, BorderColor = ?, BackgroundColor = ? WHERE guildid = ?", CONNECTION_ASYNC);
     // 0: string, 1: string, 2: uint32, 3: uint8

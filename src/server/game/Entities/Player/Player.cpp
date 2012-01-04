@@ -15128,9 +15128,19 @@ void Player::RewardQuest(Quest const *pQuest, uint32 reward, Object* questGiver,
         moneyRew = int32(pQuest->GetRewMoneyMaxLevel() * sWorld->getRate(RATE_DROP_MONEY));
 
     // If the player has a guild, it should gain 1/4 of his experience.
+    // Also, player should get 1/450XP as reputation.
     // Despite of him being at max level or not.
     if (Guild* pGuild = sObjectMgr->GetGuildById(GetGuildId()))
-        pGuild->GainXP(XP/4, GetGuildId(), GUID_LOPART(GetGUID()));
+    {
+        uint32 guildXP = XP / 4;
+        uint32 guildRep = uint32(guildXP / 450 / 4);
+
+        if (guildRep < 1)
+            guildRep = 1;
+
+        pGuild->GainXP(guildXP, GetGuildId(), GUID_LOPART(GetGUID()));
+        pGuild->GainReputation(GetGUID(),guildRep);
+    }
 
     // Give player extra money if GetRewOrReqMoney > 0 and get ReqMoney if negative
     if (pQuest->GetRewOrReqMoney())

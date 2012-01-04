@@ -742,6 +742,15 @@ public:
     uint64 GetTotalExp(uint32 guildid,uint32 guid);
     void SetPlayerGuildExp(uint32 guildid,uint32 guid, uint64 weekly_xp, uint64 total_xp);
 
+    // Player Guild Reputation
+    uint32 GetCharacterReputationGuild(uint32 guid);
+    time_t GetCharacterReputationGuildTime(uint32 guid);
+    void GainReputation(uint64 guidid, uint32 rep);
+    void InsertCharacterReputationGuild(uint32 guid, uint32 guildid);
+    void UpdateCharacterReputationGuild(uint32 guildid, uint32 guid);
+    void UpdateDisbandCharacterReputationGuild(uint32 guid);
+    void ResetDisbandCharacterReputationGuild(uint32 guid);
+
 protected:
     uint32 m_id;
     std::string m_name;
