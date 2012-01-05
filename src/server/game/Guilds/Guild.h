@@ -744,12 +744,14 @@ public:
 
     // Player Guild Reputation
     uint32 GetCharacterReputationGuild(uint32 guid);
+    uint32 GetCharacterReputationGuildRep(uint32 guid);
     time_t GetCharacterReputationGuildTime(uint32 guid);
     void GainReputation(uint64 guidid, uint32 rep);
     void InsertCharacterReputationGuild(uint32 guid, uint32 guildid);
     void UpdateCharacterReputationGuild(uint32 guildid, uint32 guid);
     void UpdateDisbandCharacterReputationGuild(uint32 guid);
     void ResetDisbandCharacterReputationGuild(uint32 guid);
+    void UpdateCharacterReputationGuildRep(uint32 wk_rep, uint32 guid);
 
 protected:
     uint32 m_id;

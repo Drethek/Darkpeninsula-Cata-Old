@@ -468,7 +468,8 @@ enum WorldStates
     WS_BG_DAILY_RESET_TIME              = 20003,                      // Next daily BG reset time
     WS_CURRENCY_RESET_TIME              = 20004,                      // Next currency week cap reset time
     WS_GUILD_AD_DAILY_RESET_TIME        = 20005,                      // Next daily Guild Advancement XP reset time
-    WS_WEEKLY_GUILD_ACTIVITY_RESET_TIME = 20006                       // Next guild activity week reset time
+    WS_WEEKLY_GUILD_ACTIVITY_RESET_TIME = 20006,                      // Next guild activity week reset time
+    WS_WEEKLY_REP_RESET_TIME            = 20007                       // Next guild reputation week reset time
 };
 
 // DB scripting commands
@@ -623,6 +624,7 @@ class World
         time_t GetNextDailyQuestsResetTime() const { return m_NextDailyQuestReset; }
         time_t GetNextWeeklyQuestsResetTime() const { return m_NextWeeklyQuestReset; }
         time_t GetNextWeeklyGuildActivityResetTime() const { return m_NextWeeklyGuildActivityReset; }
+        time_t GetNextWeeklyGuildReputationResetTime() const { return m_NextWeeklyGuildReputationReset; }
         time_t GetNextRandomBGResetTime() const { return m_NextRandomBGReset; }
         time_t GetGuildAdvancementDailyXPResetTime() const { return m_NextDailyXPReset; }
         time_t GetNextCurrencyResetTime() const { return m_NextCurrencyReset; }
@@ -769,12 +771,14 @@ class World
         void InitDailyQuestResetTime();
         void InitWeeklyQuestResetTime();
         void InitWeeklyGuildActivityResetTime();
+        void InitWeeklyGuildReputationResetTime();
         void InitRandomBGResetTime();
         void InitGuildAdvancementDailyResetTime();
         void InitCurrencyResetTime();
         void ResetDailyQuests();
         void ResetWeeklyQuests();
         void ResetWeeklyGuildActivity();
+        void ResetWeeklyGuildReputation();
         void ResetRandomBG();
         void ResetGuildAdvancementDailyXP();
         void ResetCurrencyWeekCap();
@@ -845,6 +849,7 @@ class World
         time_t m_NextDailyXPReset;
         time_t m_NextCurrencyReset;
         time_t m_NextWeeklyGuildActivityReset;
+        time_t m_NextWeeklyGuildReputationReset;
 
         //Player Queue
         Queue m_QueuedPlayer;

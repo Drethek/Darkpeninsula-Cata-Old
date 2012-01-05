@@ -173,6 +173,8 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PREPARE_STATEMENT(CHAR_SET_GUILD_REP_TIME, "UPDATE character_guild_reputation SET disband_time = UNIX_TIMESTAMP(NOW()) WHERE guid = ?", CONNECTION_ASYNC); // 0: uint32
     PREPARE_STATEMENT(CHAR_SET_GUILD_REP_RESET_TIME, "UPDATE character_guild_reputation SET disband_time = '0' WHERE guid = ?", CONNECTION_ASYNC); // 0: uint32
     PREPARE_STATEMENT(CHAR_GET_GUILD_REP_TIME, "SELECT disband_time FROM character_guild_reputation WHERE guid = ?", CONNECTION_SYNCH); // 0: uint32
+    PREPARE_STATEMENT(CHAR_GET_GUILD_REP_VAL, "SELECT weekly_rep FROM character_guild_reputation WHERE guid = ?", CONNECTION_SYNCH); // 0: uint32
+    PREPARE_STATEMENT(CHAR_SET_GUILD_REP_VAL, "UPDATE character_guild_reputation SET weekly_rep = ? WHERE guid = ?", CONNECTION_ASYNC); // 0,1: uint32
     // 0-5: uint32
     PREPARE_STATEMENT(CHAR_SET_GUILD_EMBLEM_INFO, "UPDATE guild SET EmblemStyle = ?, EmblemColor = ?, BorderStyle = ?, BorderColor = ?, BackgroundColor = ? WHERE guildid = ?", CONNECTION_ASYNC);
     // 0: string, 1: string, 2: uint32, 3: uint8

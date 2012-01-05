@@ -107,6 +107,7 @@ World::World()
     m_NextDailyQuestReset = 0;
     m_NextWeeklyQuestReset = 0;
     m_NextWeeklyGuildActivityReset = 0;
+    m_NextWeeklyGuildReputationReset = 0;
     m_NextCurrencyReset = 0;
     m_scheduledScripts = 0;
 
@@ -1766,6 +1767,9 @@ void World::SetInitialWorldSettings()
     sLog->outString("Calculate next weekly guild activity reset time..." );
     InitWeeklyGuildActivityResetTime();
 
+    sLog->outString("Calculate next weekly guild reputation reset time..." );
+    InitWeeklyGuildReputationResetTime();
+
     sLog->outString("Calculate random battleground reset time..." );
     InitRandomBGResetTime();
 
@@ -1938,6 +1942,9 @@ void World::Update(uint32 diff)
 
     if (m_gameTime > m_NextWeeklyGuildActivityReset)
         ResetWeeklyGuildActivity();
+
+    if (m_gameTime > m_NextWeeklyGuildReputationReset)
+        ResetWeeklyGuildReputation();
 
     if (m_gameTime > m_NextRandomBGReset)
         ResetRandomBG();
@@ -2677,6 +2684,13 @@ void World::InitWeeklyGuildActivityResetTime()
     m_NextWeeklyGuildActivityReset = guild_activity_time < current_time ? current_time : time_t(guild_activity_time);
 }
 
+void World::InitWeeklyGuildReputationResetTime()
+{
+    time_t ws_rep_time = uint64(sWorld->getWorldState(WS_WEEKLY_REP_RESET_TIME));
+    time_t cur_rep_time = time(NULL);
+    m_NextWeeklyGuildReputationReset = ws_rep_time < cur_rep_time ? cur_rep_time : time_t(ws_rep_time);
+}
+
 void World::InitDailyQuestResetTime()
 {
     time_t mostRecentQuestTime;
@@ -2819,6 +2833,13 @@ void World::ResetWeeklyGuildActivity()
     CharacterDatabase.Execute("UPDATE guild_member SET weekly_xp = '0'");
     m_NextWeeklyGuildActivityReset = time_t(m_NextWeeklyGuildActivityReset + WEEK);
     sWorld->setWorldState(WS_WEEKLY_GUILD_ACTIVITY_RESET_TIME, uint64(m_NextWeeklyGuildActivityReset));
+}
+
+void World::ResetWeeklyGuildReputation()
+{
+    CharacterDatabase.Execute("UPDATE character_guild_reputation SET weekly_rep = '0'");
+    m_NextWeeklyGuildReputationReset = time_t(m_NextWeeklyGuildReputationReset + WEEK);
+    sWorld->setWorldState(WS_WEEKLY_REP_RESET_TIME, uint64(m_NextWeeklyGuildReputationReset));
 }
 
 void World::ResetRandomBG()

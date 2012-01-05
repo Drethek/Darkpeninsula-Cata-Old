@@ -3139,7 +3139,16 @@ void Guild::GainReputation(uint64 guidid, uint32 rep)
     Player* player = sObjectMgr->GetPlayer(guidid);
 
     if(player)
-        player->GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(GUILD_REP_FACTION), rep);
+    {
+        uint32 cur_rep = GetCharacterReputationGuildRep(guidid);
+        
+        // Max Weekly Reputation
+        if(cur_rep <= 3500)
+        {
+            player->GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(GUILD_REP_FACTION), rep);
+            UpdateCharacterReputationGuildRep(cur_rep+rep, guidid);
+        }
+    }
 }
 
 // Guild Advancement
@@ -3358,4 +3367,28 @@ time_t Guild::GetCharacterReputationGuildTime(uint32 guid)
     }
     else
         return 0;
+}
+
+uint32 Guild::GetCharacterReputationGuildRep(uint32 guid)
+{
+    PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(CHAR_GET_GUILD_REP_VAL);
+    stmt->setUInt32(0, guid);
+    PreparedQueryResult result = CharacterDatabase.Query(stmt);
+
+    if (result) //load
+    {
+        Field *fields = result->Fetch();
+        uint32 weekly_rep_val = fields[0].GetUInt32();
+        return weekly_rep_val;
+    }
+    else
+        return 0;
+}
+
+void Guild::UpdateCharacterReputationGuildRep(uint32 wk_rep, uint32 guid)
+{
+    PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SET_GUILD_REP_VAL);
+    stmt->setUInt32(0, wk_rep);
+    stmt->setUInt32(1, guid);
+    CharacterDatabase.Execute(stmt);
 }
