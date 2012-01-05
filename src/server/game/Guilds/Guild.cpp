@@ -1323,7 +1323,7 @@ void Guild::OnPlayerStatusChange(Player* plr, uint32 flag, bool state)
 
 ///////////////////////////////////////////////////////////////////////////////
 // HANDLE CLIENT COMMANDS
-void Guild::HandleRoster(WorldSession *session /*= NULL*/, uint32 guid, uint64 activity_weekly_xp, uint64 activity_total_xp)
+void Guild::HandleRoster(WorldSession *session /*= NULL*/, uint32 guid, uint64 activity_weekly_xp, uint64 activity_total_xp, uint32 weekly_reputation)
 {
     // Guess size
     WorldPacket data(SMSG_GUILD_ROSTER, (4 + m_motd.length() + 1 + m_info.length() + 1 + 4 + _GetRanksSize() * (4 + 4 + GUILD_BANK_MAX_TABS * (4 + 4)) + m_members.size() * 50));
@@ -1413,8 +1413,17 @@ void Guild::HandleRoster(WorldSession *session /*= NULL*/, uint32 guid, uint64 a
         }
     }
 
+    // Guild Reputation Weekly Cap
+    uint32 total_weekly_rep = 0;
     for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
-        data << uint32(0); // unk
+    {
+        if(GUID_LOPART(itr->second->GetGUID()) == guid)
+            total_weekly_rep = 3500 - GetCharacterReputationGuildRep(GUID_LOPART(itr->second->GetGUID())) - weekly_reputation;
+        else
+            total_weekly_rep = 3500 - GetCharacterReputationGuildRep(GUID_LOPART(itr->second->GetGUID()));
+        
+        data << uint32(total_weekly_rep);
+    }
 
     for (Members::const_iterator itr = m_members.begin(); itr != m_members.end(); ++itr)
     {
@@ -3147,6 +3156,7 @@ void Guild::GainReputation(uint64 guidid, uint32 rep)
         {
             player->GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(GUILD_REP_FACTION), rep);
             UpdateCharacterReputationGuildRep(cur_rep+rep, guidid);
+            HandleRoster(player->GetSession(),GUID_LOPART(guidid),0,0,rep);
         }
     }
 }
@@ -3207,9 +3217,9 @@ void Guild::GainXP(uint64 xp, uint32 guildid, uint32 guid)
         if (Player *player = itr->second->FindPlayer())
         {
             if(GUID_LOPART(itr->second->GetGUID()) == guid)
-                HandleRoster(player->GetSession(),guid,weekly_xp,total_xp);
+                HandleRoster(player->GetSession(),guid,weekly_xp,total_xp,0);
             else
-                HandleRoster(player->GetSession(),0,0,0);
+                HandleRoster(player->GetSession(),0,0,0,0);
         }
     }
 }
