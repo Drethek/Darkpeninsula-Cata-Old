@@ -590,20 +590,20 @@ enum UnitFlags
 // Value masks for UNIT_FIELD_FLAGS_2
 enum UnitFlags2
 {
-    UNIT_FLAG2_FEIGN_DEATH 				= 0x00000001, 
-	UNIT_FLAG2_UNK1 					= 0x00000002, // Hide unit model (show only player equip)
-	UNIT_FLAG2_IGNORE_REPUTATION    	= 0x00000004,
-	UNIT_FLAG2_COMPREHEND_LANG 			= 0x00000008,
-	UNIT_FLAG2_MIRROR_IMAGE 			= 0x00000010,
-	UNIT_FLAG2_FORCE_MOVE 				= 0x00000040,
-	UNIT_FLAG2_DISARM_OFFHAND 			= 0x00000080,
-	UNIT_FLAG2_DISARM_RANGED 			= 0x00000400, //this does not disable ranged weapon display (maybe additional flag needed?)
-	UNIT_FLAG2_REGENERATE_POWER 		= 0x00000800,
-	UNIT_FLAG2_ALLOW_ENEMY_INTERACT 	= 0x00004000,
-	UNIT_FLAG2_ALLOW_CHEAT_SPELLS   	= 0x00040000, // allows casting spells with AttributesEx7 & SPELL_ATTR7_IS_CHEAT_SPELL	
-	UNIT_FLAG2_WORGEN_TRANSFORM 		= 0x00080000, // transform to worgen
-	UNIT_FLAG2_WORGEN_TRANSFORM2 		= 0x00100000, // transform to worgen, less animation
-	UNIT_FLAG2_WORGEN_TRANSFORM3 		= 0x00200000  // transform to worgen, less animation(why twice?)
+    UNIT_FLAG2_FEIGN_DEATH              = 0x00000001, 
+    UNIT_FLAG2_UNK1                     = 0x00000002, // Hide unit model (show only player equip)
+    UNIT_FLAG2_IGNORE_REPUTATION        = 0x00000004,
+    UNIT_FLAG2_COMPREHEND_LANG          = 0x00000008,
+    UNIT_FLAG2_MIRROR_IMAGE             = 0x00000010,
+    UNIT_FLAG2_FORCE_MOVE               = 0x00000040,
+    UNIT_FLAG2_DISARM_OFFHAND           = 0x00000080,
+    UNIT_FLAG2_DISARM_RANGED            = 0x00000400, //this does not disable ranged weapon display (maybe additional flag needed?)
+    UNIT_FLAG2_REGENERATE_POWER         = 0x00000800,
+    UNIT_FLAG2_ALLOW_ENEMY_INTERACT     = 0x00004000,
+    UNIT_FLAG2_ALLOW_CHEAT_SPELLS       = 0x00040000, // allows casting spells with AttributesEx7 & SPELL_ATTR7_IS_CHEAT_SPELL    
+    UNIT_FLAG2_WORGEN_TRANSFORM         = 0x00080000, // transform to worgen
+    UNIT_FLAG2_WORGEN_TRANSFORM2        = 0x00100000, // transform to worgen, less animation
+    UNIT_FLAG2_WORGEN_TRANSFORM3        = 0x00200000  // transform to worgen, less animation(why twice?)
 };
 
 #define IN_WORGEN_FORM (UNIT_FLAG2_WORGEN_TRANSFORM|UNIT_FLAG2_WORGEN_TRANSFORM2|UNIT_FLAG2_WORGEN_TRANSFORM3)
@@ -711,39 +711,39 @@ enum MovementFlags2
 };
 enum SplineFlags
 {
-	SPLINEFLAG_NONE 			 = 0x00000000,
-	SPLINEFLAG_FORWARD 			 = 0x00000001,
-	SPLINEFLAG_BACKWARD			 = 0x00000002,
-	SPLINEFLAG_STRAFE_LEFT 		 = 0x00000004,
-	SPLINEFLAG_STRAFE_RIGHT 	 = 0x00000008,
-	SPLINEFLAG_LEFT 			 = 0x00000010,
-	SPLINEFLAG_RIGHT 			 = 0x00000020,
-	SPLINEFLAG_PITCH_UP 		 = 0x00000040,
-	SPLINEFLAG_PITCH_DOWN 		 = 0x00000080,
-	SPLINEFLAG_DONE				 = 0x00000100,
-	SPLINEFLAG_FALLING 			 = 0x00000200,
-	SPLINEFLAG_NO_SPLINE 		 = 0x00000400,
-	SPLINEFLAG_TRAJECTORY 	     = 0x00000800,
-	SPLINEFLAG_WALKING 			 = 0x00001000,
-	SPLINEFLAG_FLYING 			 = 0x00002000,
-	SPLINEFLAG_KNOCKBACK 		 = 0x00004000,
-	SPLINEFLAG_FINAL_POINT 	 	 = 0x00008000,
-	SPLINEFLAG_FINAL_TARGET 	 = 0x00010000,
-	SPLINEFLAG_FINAL_FACING 	 = 0x00020000,
-	SPLINEFLAG_CATMULL_ROM 		 = 0x00040000,
-	SPLINEFLAG_UNKNOWN20 		 = 0x00080000,
-	SPLINEFLAG_UNKNOWN21 		 = 0x00100000,
-	SPLINEFLAG_ANIMATIONTIER	 = 0x00200000,
-	SPLINEFLAG_UNKNOWN23		 = 0x00400000,
-	SPLINEFLAG_TRANSPORT		 = 0x00800000,
-	SPLINEFLAG_UNKNOWN25		 = 0x01000000,
-	SPLINEFLAG_UNKNOWN26		 = 0x02000000,
-	SPLINEFLAG_UNKNOWN27		 = 0x04000000,
-	SPLINEFLAG_UNKNOWN28		 = 0x08000000,
-	SPLINEFLAG_UNKNOWN29 		 = 0x10000000,
-	SPLINEFLAG_ANIMATION 		 = 0x20000000,
-	SPLINEFLAG_UNKNOWN31 		 = 0x40000000,
-	SPLINEFLAG_UNKNOWN32 		 = 0x80000000,
+    SPLINEFLAG_NONE              = 0x00000000,
+    SPLINEFLAG_FORWARD           = 0x00000001,
+    SPLINEFLAG_BACKWARD          = 0x00000002,
+    SPLINEFLAG_STRAFE_LEFT       = 0x00000004,
+    SPLINEFLAG_STRAFE_RIGHT      = 0x00000008,
+    SPLINEFLAG_LEFT              = 0x00000010,
+    SPLINEFLAG_RIGHT             = 0x00000020,
+    SPLINEFLAG_PITCH_UP          = 0x00000040,
+    SPLINEFLAG_PITCH_DOWN        = 0x00000080,
+    SPLINEFLAG_DONE              = 0x00000100,
+    SPLINEFLAG_FALLING           = 0x00000200,
+    SPLINEFLAG_NO_SPLINE         = 0x00000400,
+    SPLINEFLAG_TRAJECTORY        = 0x00000800,
+    SPLINEFLAG_WALKING           = 0x00001000,
+    SPLINEFLAG_FLYING            = 0x00002000,
+    SPLINEFLAG_KNOCKBACK         = 0x00004000,
+    SPLINEFLAG_FINAL_POINT       = 0x00008000,
+    SPLINEFLAG_FINAL_TARGET      = 0x00010000,
+    SPLINEFLAG_FINAL_FACING      = 0x00020000,
+    SPLINEFLAG_CATMULL_ROM       = 0x00040000,
+    SPLINEFLAG_UNKNOWN20         = 0x00080000,
+    SPLINEFLAG_UNKNOWN21         = 0x00100000,
+    SPLINEFLAG_ANIMATIONTIER     = 0x00200000,
+    SPLINEFLAG_UNKNOWN23         = 0x00400000,
+    SPLINEFLAG_TRANSPORT         = 0x00800000,
+    SPLINEFLAG_UNKNOWN25         = 0x01000000,
+    SPLINEFLAG_UNKNOWN26         = 0x02000000,
+    SPLINEFLAG_UNKNOWN27         = 0x04000000,
+    SPLINEFLAG_UNKNOWN28         = 0x08000000,
+    SPLINEFLAG_UNKNOWN29         = 0x10000000,
+    SPLINEFLAG_ANIMATION         = 0x20000000,
+    SPLINEFLAG_UNKNOWN31         = 0x40000000,
+    SPLINEFLAG_UNKNOWN32         = 0x80000000,
 
     SPLINEFLAG_GLIDE = SPLINEFLAG_WALKING | SPLINEFLAG_FLYING,
 };
@@ -941,7 +941,7 @@ enum UnitAnimationState
     ANIMATION_HOVER     = 2,
     ANIMATION_FLYING    = 3,
 };
-		
+        
 struct MonsterMoveData
 {
     MonsterMoveData() : SplineFlag(0), AnimationState(ANIMATION_ON_GROUND), Time(0), SpeedZ(0.0f) {}
@@ -1283,7 +1283,7 @@ class Unit : public WorldObject
         inline bool HealthBelowPct(int32 pct) const { return GetHealth() * (uint64)100 < GetMaxHealth() * (uint64)pct; }
         inline bool HealthBelowPctDamaged(int32 pct, uint32 damage) const { return (int32(GetHealth()) - damage) * (int64)100 < GetMaxHealth() * (int64)pct; }
         inline bool HealthAbovePct(int32 pct) const { return GetHealth() * (uint64)100 > GetMaxHealth() * (uint64)pct; }
-        inline bool HealthAbovePctHealed(int32 pct, uint32 heal) const { return (GetHealth() + heal) * uint64(100) > GetMaxHealth() * uint64(pct); }		
+        inline bool HealthAbovePctHealed(int32 pct, uint32 heal) const { return (GetHealth() + heal) * uint64(100) > GetMaxHealth() * uint64(pct); }        
             inline float GetHealthPct() const { return GetMaxHealth() ? 100.f * GetHealth() / GetMaxHealth() : 0.0f; }
         inline uint32 CountPctFromMaxHealth(int32 pct) const { return uint32(float(pct) * GetMaxHealth() / 100.0f); }
 
