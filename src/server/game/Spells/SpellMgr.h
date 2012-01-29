@@ -1392,12 +1392,11 @@ class SpellMgr
                         return false;
             return true;
         }
-        uint32 GetSpellDifficultyId(uint32 spellId)
-        {
-            SpellDifficultySearcherMap::const_iterator i = mSpellDifficultySearcherMap.find(spellId);
-            return i == mSpellDifficultySearcherMap.end() ? 0 : (*i).second;
-        }
-        void SetSpellDifficultyId(uint32 spellId, uint32 id) { mSpellDifficultySearcherMap[spellId] = id; }
+        
+        // Spell difficulty
+        uint32 GetSpellDifficultyId(uint32 spellId) const;
+        void SetSpellDifficultyId(uint32 spellId, uint32 id);
+        uint32 GetSpellIdForDifficulty(uint32 spellId, Unit const* caster) const;
 
         const SpellsRequiringSpellMap GetSpellsRequiringSpell()
         {
